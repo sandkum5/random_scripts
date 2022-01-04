@@ -91,7 +91,6 @@ def main():
         tfvar_list = get_variable_names(file)
         for var in tfvar_list:
             all_vars.append(var)
-    print(f"all_vars: {all_vars}")
     create_file_variables(all_vars)
     create_file_tfvars(all_vars)
 
