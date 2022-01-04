@@ -79,7 +79,6 @@ def create_file_tfvars(tfvar_list):
 
 
 def main():
-    tf_file = 'sample.tf'
     pwd = os.getcwd()
     path = f"{pwd}/*.tf"
     file_list = []
@@ -89,7 +88,7 @@ def main():
 
     all_vars = []
     for file in file_list:
-        tfvar_list = get_variable_names(tf_file)
+        tfvar_list = get_variable_names(file)
         for var in tfvar_list:
             all_vars.append(var)
     print(f"all_vars: {all_vars}")
