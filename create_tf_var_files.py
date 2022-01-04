@@ -42,13 +42,6 @@ def create_file_variables(tfvar_list):
     """
     template = Template(
         'variable "$var_name" {\n  type = string\n  description = ""\n  default = ""\n}\n\n')
-
-    # """
-    # variable "$var_name" {
-    #   type = string
-    #   description = ""
-    #   default = ""
-    # }"""
     for var in tfvar_list:
         with open("variables.tf", 'a') as f:
             f.write(template.substitute(var_name=var))
