@@ -14,10 +14,8 @@ variable "ntp_name" {
   description = ""
   default = ""
 }
-
 Filename: terraform.tfvars
 ntp_name = ""
-
 The code does the following:
     - Read *.tf files in the current dir.
     - Check each line for var.xxx.
@@ -47,11 +45,16 @@ def get_variable_names(tf_file):
                         if re.search('var\.', var):
                             var_list.append(var)
     # Create a list with variable names
+    # Remove "var." from the variable.
     var_list2 = []
     for var in var_list:
         var_list2.append(re.split("\.", var)[1])
-    # Create final list with unique variables
-    tfvar_list = list(set(var_list2))
+    # Remove "," from variable if present
+    var_list3 = []
+    for var in var_list2:
+        var_list3.append(re.split("\,", var)[0])
+    # Create final list with unique variable names
+    tfvar_list = list(set(var_list3))
     return tfvar_list
 
 
@@ -91,8 +94,10 @@ def main():
         tfvar_list = get_variable_names(file)
         for var in tfvar_list:
             all_vars.append(var)
-    create_file_variables(all_vars)
-    create_file_tfvars(all_vars)
+
+    all_file_vars = list(set(all_vars))
+    create_file_variables(all_file_vars)
+    create_file_tfvars(all_file_vars)
 
 
 if __name__ == '__main__':
