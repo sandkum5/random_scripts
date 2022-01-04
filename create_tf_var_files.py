@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """
+The intention of creating this script is to easy the creation of variables.tf and terraform.tfvars files. 
+The *.tf files will have references to the variable. 
+E.g. Name = var.ntp_name
+The script reads the *.tf files, checks the called variable var.ntp_name, defines the variable ntp_name in variables.tf file and creates it in terraform.tfvars. 
+
 The code does the following:
     - Read *.tf files in the current dir.
     - Check each line for var.xxx.
-    - If we have a variable defined, create variables.tf file.
+    - If we have a variable defined, create variables.tf file with the variable definition.
+    - Create terraform.tfvars file with the variable.
     - Append variable template to the file with the variable name.
     - Skip lines starting with "#" or "  #". Modify line 24 for further filtering.
 """
