@@ -7,20 +7,15 @@ $end_ip   = Read-Host "Please enter the end IP last octet [167]: "
 
 $start_ip..$end_ip | ForEach-Object {
     $targetIp = "$subnet.$_"
-    Write-Host "Checking Target: $targetIp"
-    Write-Host "-------------------------------"
-    Write-Host " "
     $response = ""
     $uri = "https://$targetIp/redfish/v1"
     try {
         $response = Invoke-WebRequest -SkipCertificateCheck -Method 'GET' -Uri $uri -TimeoutSec 2
         if ($response.StatusCode -eq 200) {
             $responseStatusCode = $response.StatusCode
-            Write-Host "Response Status Code: $responseStatusCode"
             $product = ($response.Content | ConvertFrom-Json).Product
             $vendor = ($response.Content | ConvertFrom-Json).Vendor
-            Write-Host "Product Id: $product, Company: $vendor"
-            Write-Host " "
+            Write-Host "Target: $targetIp, Product Id: $product, Company: $vendor"
         }
         else {
             Write-Host "Response Status Code: $response.StatusCode"
