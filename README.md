@@ -5,7 +5,8 @@
                            The script will add a "ntp_name" variable definition in variables.tf file and will add a variable in terraform.tfvars file.
 
 `findCIMC.ps1` : Get UCS CIMC Product,Vendor Info using Redfish API without Auth
-Note: This will only work with CIMC version 3.0 or higher which has Redfish API support.
+
+`Note`: This will only work with CIMC version 3.0 or higher which has Redfish API support.
 
 ```
 Sample Run:
