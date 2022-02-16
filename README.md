@@ -10,36 +10,12 @@
 Sample Run:
 
 > ./findCIMC.ps1
-Please enter the subnet id in format x.y.z: [198.19.216]: 198.19.216
-Please enter the start IP last octet: [163]: 163
-Please enter the end IP last octet: [167]: 167
-Checking Target: 198.19.216.163
--------------------------------
- 
-@{Product=UCSC-C220-M5SX; Vendor=Cisco Systems Inc.}
- 
-Checking Target: 198.19.216.164
--------------------------------
- 
-@{Product=UCSC-C220-M5SX; Vendor=Cisco Systems Inc.}
- 
-Checking Target: 198.19.216.165
--------------------------------
- 
-@{Product=UCSC-C220-M5SX; Vendor=Cisco Systems Inc.}
- 
-Checking Target: 198.19.216.166
--------------------------------
- 
-@{Product=UCSC-C220-M5SX; Vendor=Cisco Systems Inc.}
- 
-Checking Target: 198.19.216.167
--------------------------------
- 
-Invoke-RestMethod: /path/to/script/findCIMC.ps1:12:17
-Line |
-  12 |  … $response = Invoke-RestMethod -SkipCertificateCheck -Method 'GET' -Ur …
-     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | The request was canceled due to the configured HttpClient.Timeout of 2 seconds elapsing.
+Please enter the subnet id in format [198.19.216]: : 198.19.216
+Please enter the start IP last octet [163]: : 163
+Please enter the end IP last octet [167]: : 168
+Target: 198.19.216.163, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.                                         
+Target: 198.19.216.164, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.                                         
+Target: 198.19.216.165, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.                                         
+Target: 198.19.216.166, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.                                         
 
 ```
