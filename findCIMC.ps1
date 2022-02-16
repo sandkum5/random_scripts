@@ -9,24 +9,23 @@ $start_ip..$end_ip | ForEach-Object {
     $targetIp = "$subnet.$_"
     $response = ""
     $uri = "https://$targetIp/redfish/v1"
-    try {
-        if (Test-Connection -TargetName $targetIp -Quiet -Count 2 -Delay 1) {
+    if (Test-Connection -TargetName $targetIp -Quiet -Count 2 -Delay 1) {
+        try {
             $response = Invoke-WebRequest -SkipCertificateCheck -Method 'GET' -Uri $uri -TimeoutSec 2
             if ($response.StatusCode -eq 200) {
                 $responseStatusCode = $response.StatusCode
                 $product = ($response.Content | ConvertFrom-Json).Product
                 $vendor = ($response.Content | ConvertFrom-Json).Vendor
                 Write-Host "Target: $targetIp, Product Id: $product, Company: $vendor"
+            } else {
+                Write-Host "Target: $targetIp, Not a Cisco UCS Server: Status Code: $response.StatusCode"
             }
-            else {
-                Write-Host "Response Status Code: $response.StatusCode"
-                Write-Host "Not a Cisco UCS Server"
-            }
-        } else {
-            Write-Host "Target: $targetIp, Not Reachable"
+        } catch {
+            $statusCode = $_.Exception.Response.StatusCode.Value__
+            Write-Host "Target: $targetIp, Not a Cisco UCS Server: Status Code: $statusCode"
+            # Write-Host $_.Exception.Response.StatusDescription
         }
-    } catch {
-        Write-Host $_.Exception.Response.StatusDescription
-        Write-Host $_.Exception.Response.StatusCode.Value__
+    } else {
+        Write-Host "Target: $targetIp, Not Reachable"
     }
 }
