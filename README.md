@@ -32,3 +32,23 @@ Target: 198.19.216.163, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.
 Target: 198.19.216.164, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.                                         
 Target: 198.19.216.165, Product Id: UCSC-C220-M5SX, Company: Cisco Systems Inc.   
 ```
+
+`aci_signed_query.py` : Script to make ACI API calls using Signature Based Authentication
+
+```
+# ./apic_query_certsig.py 
+Enter APIC IP: x.x.x.x
+Enter API Path: /api/node/class/fvTenant.json
+Enter Username: admin
+Enter Private Key filename: admin.key
+
+Response Status Code: 200
+Response Data: 
+{'imdata': [{'fvTenant': {'attributes': {'annotation': '',
+                                         'childAction': '',
+                                         'descr': '',
+                                         'dn': 'uni/tn-mgmt',
+                                         'extMngdBy': '',
+                                         'lcOwn': 'local',
+
+```
