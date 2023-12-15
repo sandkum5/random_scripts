@@ -1,3 +1,9 @@
+# Part of workflow to gather stats from UCSM domains for troubleshooting.
+# Script filenames:
+#     get_ucsm_stats.py
+#     gen_cmds.py
+#     ucsm_cmds.yml
+# Update lifstats id and add additional lifstats cmds based on environment
 hostname: "x.x.x.x"
 username: "admin"
 log_file_suffix: "ucsm.log"
