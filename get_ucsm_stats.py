@@ -4,6 +4,11 @@
     Uses ucsm_data.yml file as input.
     Update the ucsm_data.yml file with the UCSM IP, username, and commands to collect.
     Note: The command needs to be entered in sequence along with "exit" commands to exit from scopes(NXOS, IOM, VIC level scopes).
+    Part of workflow to gather stats from UCSM domains for troubleshooting.
+    Script filenames:
+        get_ucsm_stats.py
+        gen_cmds.py
+        ucsm_cmds.yml
 """
 import paramiko
 from datetime import datetime
