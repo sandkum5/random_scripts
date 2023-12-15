@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 """
     Script to gather UCSM(NXOS, IOM, VIC(Adapter)) Command outputs for troubleshooting
+    Uses ucsm_data.yml file as input
 """
 import paramiko
+from datetime import datetime
 import time
+import yaml
+import getpass
+
+# Ref: https://github.com/paramiko/paramiko/issues/2238
+def transport_factory(*args, **kwargs):
+    kwargs.setdefault('default_window_size', 4 * 2**15)
+    return paramiko.Transport(*args, **kwargs)
 
 def print_output(shell, log_file):
     """
@@ -30,43 +39,27 @@ def print_output(shell, log_file):
 
 
 if __name__ == '__main__':
+
+    with open('cmds.yml', 'r') as file:
+        data = yaml.safe_load(file)
+
     # UCSM Info
-    hostname = "10.201.201.73"    # Update
-    username = "admin"      # Update
-    password = "P@ssword135"   # Update
-    log_file = 'ucsm_x.log' # Update    # Path to the output file
+    hostname = data["hostname"]
+    username = data["username"]
+    # password = data["password"]
+    password = getpass.getpass(prompt='Enter UCSM Password: ')
+    log_file = f'{datetime.now().strftime("%Y%m%d-%H%M%S")}_{data["log_file"]}'
 
     # SSH Connection
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        ssh.connect(hostname, username=username, password=password)
+        ssh.connect(hostname, username=username, password=password, transport_factory=transport_factory)
         shell = ssh.invoke_shell()
 
         # Commands to Execute in UCSM
-        commands = [                    # Update
-            'connect nxos a',
-            'terminal length 0',
-            'show interface brief',
-            'exit',
-            'connect local-mgmt a',
-            'connect iom 1',
-            'show platform software woodside sts',
-            'show platform software woodside rmon 0 ni0',
-            'show platform software woodside rmon 0 hi31',
-            'exit',
-            'connect adapter 1/1/1',
-            'connect',
-            'attach-mcp',
-            'vnic',
-            'lifstats 16',
-            'lifstats 16',
-            'exit',
-            'exit',
-            'exit',
-            'exit'
-        ]
+        commands = data["commands"]
 
         # Send commands and write output to log_file
         for command in commands:
@@ -74,7 +67,7 @@ if __name__ == '__main__':
             shell.send(f"{command}\n")
             time.sleep(1)
             print_output(shell, log_file)
-            time.sleep(1)
+            time.sleep(.5)
 
         # Close Shell and SSH session
         shell.close()
