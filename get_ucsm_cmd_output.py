@@ -31,9 +31,9 @@ def print_output(shell, log_file):
 
 if __name__ == '__main__':
     # UCSM Info
-    hostname = "ucsm_ip"    # Update
+    hostname = "10.201.201.73"    # Update
     username = "admin"      # Update
-    password = "password"   # Update
+    password = "P@ssword135"   # Update
     log_file = 'ucsm_x.log' # Update    # Path to the output file
 
     # SSH Connection
@@ -46,34 +46,34 @@ if __name__ == '__main__':
 
         # Commands to Execute in UCSM
         commands = [                    # Update
-            'connect nxos a\n',
-            'terminal length 0\n',
-            'show interface brief\n',
-            'exit\n',
-            'connect local-mgmt a\n',
-            'connect iom 1\n',
-            'show platform software woodside sts\n',
-            'show platform software woodside rmon 0 ni0\n',
-            'show platform software woodside rmon 0 hi31\n',
-            'exit\n',
-            'connect adapter 1/1/1\n',
-            'connect\n',
-            'attach-mcp\n',
-            'vnic\n',
-            'lifstats 16\n',
-            'lifstats 16\n',
-            'exit\n',
-            'exit\n',
-            'exit\n',
-            'exit\n'
+            'connect nxos a',
+            'terminal length 0',
+            'show interface brief',
+            'exit',
+            'connect local-mgmt a',
+            'connect iom 1',
+            'show platform software woodside sts',
+            'show platform software woodside rmon 0 ni0',
+            'show platform software woodside rmon 0 hi31',
+            'exit',
+            'connect adapter 1/1/1',
+            'connect',
+            'attach-mcp',
+            'vnic',
+            'lifstats 16',
+            'lifstats 16',
+            'exit',
+            'exit',
+            'exit',
+            'exit'
         ]
 
         # Send commands and write output to log_file
         for command in commands:
             print(f"Command: {command}")
-            shell.send(command)
+            shell.send(f"{command}\n")
             time.sleep(1)
-            print_output(shell)
+            print_output(shell, log_file)
             time.sleep(1)
 
         # Close Shell and SSH session
