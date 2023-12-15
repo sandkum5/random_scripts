@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
     Script to gather UCSM(NXOS, IOM, VIC(Adapter)) Command outputs for troubleshooting
-    Uses ucsm_data.yml file as input
+    Uses ucsm_data.yml file as input. 
+    Update the ucsm_data.yml file with the UCSM IP, username, and commands to collect.
+    Note: The command needs to be entered in sequence along with "exit" commands to exit from scopes(NXOS, IOM, VIC level scopes).
 """
 import paramiko
 from datetime import datetime
