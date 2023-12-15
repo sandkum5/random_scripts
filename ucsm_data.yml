@@ -1,6 +1,6 @@
 hostname: "x.x.x.x"
 username: "admin"
-log_file: "ucsm.log"
+log_file_suffix: "ucsm.log"
 commands:
   - connect nxos a
   - terminal length 0
