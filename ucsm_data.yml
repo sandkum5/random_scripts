@@ -2,22 +2,21 @@ hostname: "x.x.x.x"
 username: "admin"
 log_file_suffix: "ucsm.log"
 commands:
-  - connect nxos a
+  - connect nxos a                                  # Get FI-A Logs
   - terminal length 0
   - show interface brief
-  - exit
-  - connect local-mgmt a
-  - connect iom 1
+  - attach fex 1                                    # Get FI-A/IOM-1 Logs
   - show platform software woodside sts
-  - show platform software woodside rmon 0 ni0
-  - show platform software woodside rmon 0 hi31
+  # - show platform software woodside rmon 0 ni0    # IOM Network Interface Stats connected to FI
+  # - show platform software woodside rmon 0 hi31   # IOM Host Interface(Backplane) Stats connected to Server Adapters
   - exit
-  - connect adapter 1/1/1
+  - exit
+  - connect adapter 1/1/1                            # Get Chassis-1/Server-1/Adapter-1 Logs
   - connect
   - attach-mcp
   - vnic
-  - lifstats 16
-  - lifstats 16
+  # - lifstats 16                                    # vNIC/vHBA Stats
+  # - lifstats 16
   - exit
   - exit
   - exit
