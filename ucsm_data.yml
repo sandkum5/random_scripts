@@ -1,0 +1,24 @@
+hostname: "x.x.x.x"
+username: "admin"
+log_file: "ucsm.log"
+commands:
+  - connect nxos a
+  - terminal length 0
+  - show interface brief
+  - exit
+  - connect local-mgmt a
+  - connect iom 1
+  - show platform software woodside sts
+  - show platform software woodside rmon 0 ni0
+  - show platform software woodside rmon 0 hi31
+  - exit
+  - connect adapter 1/1/1
+  - connect
+  - attach-mcp
+  - vnic
+  - lifstats 16
+  - lifstats 16
+  - exit
+  - exit
+  - exit
+  - exit
