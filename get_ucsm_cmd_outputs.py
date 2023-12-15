@@ -71,7 +71,7 @@ if __name__ == '__main__':
     username = data["username"]
     # password = data["password"]
     password = getpass.getpass(prompt='Enter UCSM Password: ')
-    log_file = f'{datetime.now().strftime("%Y%m%d-%H%M%S")}_{data["log_file"]}'
+    log_file = f'{datetime.now().strftime("%Y%m%d-%H%M%S")}_{data["log_file_suffix"]}'
 
     # Verify TCP connectivity to UCSM on port 443
     tcp_conn = check_server(address=hostname, port=443)
